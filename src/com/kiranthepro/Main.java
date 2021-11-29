@@ -2,20 +2,19 @@ package com.kiranthepro;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.Scanner;
 
 public class Main {
 
     public static void main(String[] args) {
-        File libraryFile = initialiseFile("books.txt");
+        File libraryFile = initialiseFile("books.csv");
         LinkedHashMap<String, String> bookInfo = getBookInfo();
 
-        
-
-        bookInfo.entrySet().forEach(entry -> {
-            System.out.println(entry.getKey() + ": " + entry.getValue());
-        });
+        String result = "";
+        bookInfo.forEach((key, value) -> System.out.println(key + ": " + value));
+        writeToFile(libraryFile, bookInfo);
 
     }
 
@@ -47,9 +46,16 @@ public class Main {
         return bookInfo;
     }
 
+    public static void writeToFile(File file, LinkedHashMap<String, String> data) {
+
+
+//        System.out.println(String.join(",", dataArray));
+    }
+
     public static String getInput(String prompt) {
         System.out.println(prompt);
         Scanner scanner = new Scanner(System.in);
         return scanner.next();
     }
+
 }
