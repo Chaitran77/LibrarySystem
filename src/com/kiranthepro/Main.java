@@ -9,7 +9,7 @@ import java.util.Scanner;
 
 public class Main {
 
-    private static String[] bookAttributes = {"title", "ISBN", "author", "genre", "year", "page count", "language", "cover type"};
+    private static final String[] bookAttributes = {"title", "ISBN", "author", "genre", "year", "page count", "language", "cover type"};
 
     public static void main(String[] args) {
 
@@ -52,7 +52,30 @@ public class Main {
         LinkedHashMap<String, String> bookInfo = new LinkedHashMap<>();
 
         for (String attribute: bookAttributes) {
-            bookInfo.put(attribute, getInput("Type in the " + attribute + " of the book:"));
+            String input = getInput("Type in the " + attribute + " of the book:");
+            boolean inputValid = false;
+            switch (attribute) {
+                case "title":
+                    if (input.length() <= 100) {
+                        inputValid = true;
+                    }
+                    break;
+                case "ISBN":
+                    break;
+                case "author":
+                    break;
+                case "genre":
+                    break;
+                case "year":
+                    break;
+                case "page count":
+                    break;
+                case "language":
+                    break;
+                case "cover type":
+                    break;
+            }
+            bookInfo.put(attribute, input);
         }
 
         return bookInfo;
