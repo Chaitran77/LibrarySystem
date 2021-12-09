@@ -1,0 +1,21 @@
+[
+	{
+		"user": "kiran@inteleyes.com",
+		"password": "some hash",
+		"administrator": true,
+		"privileges": [
+			"add book",
+			"delete book",
+			"modify book",
+			"view books"
+		]
+	},
+	{
+		"user": "johnsmith@WHO.org",
+		"password": "some hash",
+		"administrator":  false,
+		"privileges": [
+			"view books"
+		]
+	}
+]

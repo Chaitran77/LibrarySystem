@@ -1,30 +1,41 @@
 package com.kiranthepro;
 
+import org.json.JSONObject;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.LinkedHashMap;
-import java.util.Scanner;
+import java.util.*;
 
 public class Main {
 
-    private static final String[] bookAttributes = {"title", "ISBN", "author", "genre", "year", "page count", "language", "cover type"};
+    private static final String[] bookAttributes = {"title", "ISBN", "author", "genre", "year", "page count", "ISO language code", "cover type"};
 
     public static void main(String[] args) {
+        ArrayList<JSONObject> accounts = UAC.getAllAccountInfo("users.json");
+//        System.out.println(hi.get(0).get("privileges"));
+        assert accounts != null;
+        for (JSONObject account: accounts) {
+            System.out.println(account.get("user"));
+        }
+
+        MainMenu menu = new MainMenu(false);
+        menu.display();
 
         File libraryFile = initialiseFile("books.csv");
 
         boolean done = false;
         while (!done) {
             writeToFile(libraryFile, getBookInfo());
-            if (getInput("Would you like to add another file?").toLowerCase().contains("n")) {
+            if (getInput("Would you like to add another book?").toLowerCase().contains("n")) {
                 done = true;
             }
         }
-
+        
 
     }
+
+
 
     public static File initialiseFile(String fileName) {
         File fileObj = new File(fileName);
@@ -52,34 +63,116 @@ public class Main {
         LinkedHashMap<String, String> bookInfo = new LinkedHashMap<>();
 
         for (String attribute: bookAttributes) {
-            String input = getInput("Type in the " + attribute + " of the book:");
-            boolean inputValid = false;
-            switch (attribute) {
-                case "title":
-                    if (input.length() <= 100) {
-                        inputValid = true;
-                    }
-                    break;
-                case "ISBN":
-                    break;
-                case "author":
-                    break;
-                case "genre":
-                    break;
-                case "year":
-                    break;
-                case "page count":
-                    break;
-                case "language":
-                    break;
-                case "cover type":
-                    break;
-            }
-            bookInfo.put(attribute, input);
+            getAndPutBookAttribute(attribute, bookInfo);
         }
 
         return bookInfo;
     }
+
+    public static void getAndPutBookAttribute(String attribute, LinkedHashMap<String, String> bookInfo) {
+        String input = getInput("Type in the " + attribute + " of the book:");
+        try {
+            validateAttributeInput(attribute, input);
+            bookInfo.put(attribute, input);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            getAndPutBookAttribute(attribute, bookInfo);
+        }
+    }
+
+    public static void validateAttributeInput(String attribute, String input) throws Exception {
+        boolean inputValid = false;
+        String errorMessage = "";
+
+        switch (attribute) {
+            case "title":
+                if (input.length() <= 100) {
+                    inputValid = true;
+                } else {
+                    errorMessage = "Type an input with <= 100 characters";
+                }
+                break;
+
+            case "ISBN":
+                try {
+                    // both checks if number and 13 digits
+                    Long.parseLong(input);
+                    if (input.length() == 13) {
+                        inputValid = true;
+                    } else {
+                        errorMessage = "Type an ISBN number (must be exclusively 13 integer digits):";
+                    }
+                } catch (NumberFormatException e) {
+//                        inputValid = false;
+                    errorMessage = "Type an ISBN number (must be exclusively 13 integer digits):";
+                }
+                break;
+
+            case "author":
+                if (input.length() <= 50) {
+                    inputValid = true;
+                } else {
+                    errorMessage = "Type an input <= 50 characters:";
+                }
+                break;
+
+            case "genre":
+                if (input.length() <= 30) {
+                    inputValid = true;
+                } else {
+                    errorMessage = "Type an input <= 30 characters:";
+                }
+                break;
+
+            case "year":
+                try {
+                    Integer.parseInt(input);
+                    if (input.length() == 4) {
+                        inputValid = true;
+                    } else {
+                        errorMessage = "Type a number with exactly 4 digits (<=9999):";
+                    }
+                } catch (NumberFormatException e) {
+                    errorMessage = "Type a number with exactly 4 digits (<=9999):";
+                }
+                break;
+
+            case "page count":
+                try {
+                    if (Integer.parseInt(input) <= 1600) {
+                        inputValid = true;
+                    } else {
+                        errorMessage = "Type a number <= 1600:";
+                    }
+                } catch (NumberFormatException e){
+                    errorMessage = "Type a number <= 1600:";
+                }
+                break;
+
+            case "ISO language code":
+                String languageISOCodes = String.join(", ", Locale.getISOLanguages());
+                if (Arrays.stream(Locale.getISOLanguages()).anyMatch(input::equalsIgnoreCase)) {
+                    inputValid = true;
+                } else {
+                    errorMessage = "Please type one of the following codes: " + languageISOCodes;
+                }
+                break;
+
+            case "cover type":
+                if (input.equalsIgnoreCase("hardback") || input.equalsIgnoreCase("softback")) {
+                    inputValid = true;
+                } else {
+                    errorMessage = "Please type one of hardback or softback:";
+                }
+                break;
+        }
+
+        if (!inputValid) {
+            throw new Exception(errorMessage);
+        }
+
+    }
+
 
     public static void writeToFile(File file, LinkedHashMap<String, String> data) {
         String[] values = new String[data.size()];
@@ -111,7 +204,8 @@ public class Main {
     public static String getInput(String prompt) {
         System.out.println(prompt);
         Scanner scanner = new Scanner(System.in);
-        return scanner.nextLine();
+        scanner.useDelimiter("\n");
+        return scanner.next();
     }
 
 }
