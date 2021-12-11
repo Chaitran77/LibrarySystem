@@ -110,11 +110,5 @@ public class UAC {
 		}
 	}
 
-
-	public class User {
-		public User (String user) {
-
-		}
-	}
 }
 
