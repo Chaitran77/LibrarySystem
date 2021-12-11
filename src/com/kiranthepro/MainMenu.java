@@ -14,6 +14,7 @@ public class MainMenu {
 
 	private String[] actions;
 	private final JSONObject loggedInUserAccount;
+	public boolean exited = false;
 
 	public MainMenu() {
 
@@ -21,12 +22,12 @@ public class MainMenu {
 		// in constructor as it needs to be run to produce the correct menu every time
 		loggedInUserAccount = UAC.login();
 
-		String[] universalActions = new String[]{ "switch user" };
-		List<Object> actionsList = loggedInUserAccount.getJSONArray("privileges").toList();
-		actionsList.add(""); // where the first universalActions element will begin
+		String[] universalActions = new String[]{ "switch user", "exit"};
 
+		List<Object> actionsList = loggedInUserAccount.getJSONArray("privileges").toList();
+		actionsList.addAll(List.of(universalActions)); // where the universalActions elements will be
+		// convert to array
 		actions = Arrays.stream(actionsList.toArray()).toArray(String[]::new);
-		System.arraycopy(universalActions, 0, actions, actions.length-1, universalActions.length);
 
 		// delete/modify book --> book name --> search for book() --> display book info() --> is this the book you'd like to delete/modify?
 	}
@@ -49,6 +50,16 @@ public class MainMenu {
 		}
 	}
 
+	private void exit() {
+		this.exited = true;
+	}
+
+	public boolean isExited() {
+		return exited;
+	}
+
+	// pv switch user() {}
+
 	private void test() {
 		System.out.println("test function");
 	}
@@ -64,6 +75,7 @@ public class MainMenu {
 			case "add user" -> addUser();
 			case "delete user" -> deleteUser();
 			case "switch user" -> test();
+			case "exit" -> exit();
 		}
 	}
 }
