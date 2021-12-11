@@ -1,7 +1,7 @@
 [
 	{
 		"user": "kiran@inteleyes.com",
-		"password": "some hash",
+		"password": "b26d28f46ceba1518fad6a7122320240084a5fe4fe73a5128fffcfffa86f2907",
 		"administrator": true,
 		"privileges": [
 			"add book",
@@ -12,9 +12,10 @@
 	},
 	{
 		"user": "johnsmith@WHO.org",
-		"password": "some hash",
+		"password": "30e8a5e111cffb44debb2866258a31acb2c299dcd82e154d1628ad3507b4cb23",
 		"administrator":  false,
 		"privileges": [
+			"Add book",
 			"view books"
 		]
 	}
