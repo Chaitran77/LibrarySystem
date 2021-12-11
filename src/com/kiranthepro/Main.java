@@ -19,9 +19,27 @@ public class Main {
 
     public static String getInput(String prompt) {
         System.out.println(prompt);
-        Scanner scanner = new Scanner(System.in);
-        scanner.useDelimiter("\n");
-        return scanner.next();
+        try {
+            Scanner scanner = new Scanner(System.in);
+            scanner.useDelimiter("\n");
+            return scanner.next();
+        } catch (Exception e) {
+            System.out.println("An exception occurred - please input a valid sequence of characters:");
+            return getInput(prompt);
+        }
+    }
+
+    public static String getInputNNL(String prompt) {
+        // prints prompt without newline
+        System.out.print(prompt);
+        try {
+            Scanner scanner = new Scanner(System.in);
+            scanner.useDelimiter("\n");
+            return scanner.next();
+        } catch (Exception e) {
+            System.out.println("An exception occurred - please input a valid sequence of characters:");
+            return getInput(prompt);
+        }
     }
 
 }

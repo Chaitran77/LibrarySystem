@@ -12,6 +12,8 @@ import java.util.HashMap;
 import java.util.HexFormat;
 import java.util.Scanner;
 
+import static com.kiranthepro.Main.getInputNNL;
+
 public class UAC {
 
 	public static JSONObject login() {
