@@ -1,5 +1,9 @@
 package com.kiranthepro;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.HexFormat;
 import java.util.Scanner;
 
 public class Main {
@@ -40,6 +44,19 @@ public class Main {
             System.out.println("An exception occurred - please input a valid sequence of characters:");
             return getInput(prompt);
         }
+    }
+
+    public static FileWriter getFileWriter(File file) {
+        try {
+            return new FileWriter(file, true);
+        } catch (IOException e) {
+            return null;
+        }
+    }
+
+    public static String bytesToHex(byte[] bytes) {
+        // helper for getHash()
+        return HexFormat.of().formatHex(bytes);
     }
 
 }

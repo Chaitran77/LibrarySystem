@@ -7,6 +7,7 @@ import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.Locale;
 
+import static com.kiranthepro.Main.getFileWriter;
 import static com.kiranthepro.Main.getInput;
 
 public class BookUtils {
@@ -182,11 +183,5 @@ public class BookUtils {
 		System.out.println();
 	}
 
-	private static FileWriter getFileWriter(File file) {
-		try {
-			return new FileWriter(file, true);
-		} catch (IOException e) {
-			return null;
-		}
-	}
+
 }

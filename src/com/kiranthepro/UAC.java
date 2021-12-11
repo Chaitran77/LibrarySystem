@@ -9,9 +9,9 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HexFormat;
 import java.util.Scanner;
 
+import static com.kiranthepro.Main.bytesToHex;
 import static com.kiranthepro.Main.getInputNNL;
 
 public class UAC {
@@ -110,10 +110,6 @@ public class UAC {
 		}
 	}
 
-	private static String bytesToHex(byte[] bytes) {
-		// helper for getHash()
-		return HexFormat.of().formatHex(bytes);
-	}
 
 	public class User {
 		public User (String user) {
