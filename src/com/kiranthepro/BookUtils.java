@@ -61,16 +61,15 @@ public class BookUtils {
 
 	private static void getAndPutBookAttribute(String attribute, LinkedHashMap<String, String> bookInfo) {
 		String input = getInput("Type in the " + attribute + " of the book:");
-		try {
-			validateAttributeInput(attribute, input);
+
+		if (validateAttributeInput(attribute, input)) {
 			bookInfo.put(attribute, input);
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
+		} else {
 			getAndPutBookAttribute(attribute, bookInfo);
 		}
 	}
 
-	private static void validateAttributeInput(String attribute, String input) throws Exception {
+	private static boolean validateAttributeInput(String attribute, String input) {
 		boolean inputValid = false;
 		String errorMessage = "";
 
@@ -158,7 +157,10 @@ public class BookUtils {
 		}
 
 		if (!inputValid) {
-			throw new Exception(errorMessage);
+			System.out.println(errorMessage);
+			return false;
+		} else {
+			return true;
 		}
 
 	}
