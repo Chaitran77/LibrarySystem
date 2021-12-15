@@ -14,7 +14,7 @@ public class Main {
 
         MainMenu menu = new MainMenu();
         // TODO: Add exit method for menu and link to method state (.isExited())
-        while (!menu.isExited()) {
+        while (!menu.exited) {
             menu.display();
             menu.getAndExecuteAction();
         }

@@ -54,10 +54,6 @@ public class MainMenu {
 		this.exited = true;
 	}
 
-	public boolean isExited() {
-		return exited;
-	}
-
 	// pv switch user() {}
 
 	private void test() {
