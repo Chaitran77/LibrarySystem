@@ -7,7 +7,9 @@
 			"add book",
 			"delete book",
 			"modify book",
-			"view books"
+			"view books",
+			"add user",
+			"delete user"
 		]
 	},
 	{
@@ -17,6 +19,19 @@
 		"privileges": [
 			"Add book",
 			"view books"
+		]
+	},
+	{
+		"user": "k",
+		"password": "b26d28f46ceba1518fad6a7122320240084a5fe4fe73a5128fffcfffa86f2907",
+		"administrator": true,
+		"privileges": [
+			"add book",
+			"delete book",
+			"modify book",
+			"view books",
+			"add user",
+			"delete user"
 		]
 	}
 ]

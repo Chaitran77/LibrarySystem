@@ -7,12 +7,13 @@ import java.util.List;
 import java.util.Scanner;
 
 import static com.kiranthepro.BookUtils.addBook;
+import static com.kiranthepro.BookUtils.viewBooks;
 import static com.kiranthepro.UAC.addUser;
 import static com.kiranthepro.UAC.deleteUser;
 
 public class MainMenu {
 
-	private String[] actions;
+	private final String[] actions;
 	private final JSONObject loggedInUserAccount;
 	public boolean exited = false;
 
@@ -67,7 +68,7 @@ public class MainMenu {
 			case "add book" -> addBook();
 			case "delete book" -> test();
 			case "modify book" -> test();
-			case "view books" -> test();
+			case "view books" -> viewBooks();
 			case "add user" -> addUser();
 			case "delete user" -> deleteUser();
 			case "switch user" -> test();

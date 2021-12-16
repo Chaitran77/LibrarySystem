@@ -1,11 +1,16 @@
 package com.kiranthepro;
 
+import de.vandermeer.asciitable.AsciiTable;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.Locale;
+import java.util.stream.Stream;
 
 import static com.kiranthepro.Main.getFileWriter;
 import static com.kiranthepro.Main.getInput;
@@ -13,19 +18,6 @@ import static com.kiranthepro.Main.getInput;
 public class BookUtils {
 
 	private static final String[] bookAttributes = {"title", "ISBN", "author", "genre", "year", "page count", "ISO language code", "cover type"};
-
-	public static void addBook() {
-		File libraryFile = initialiseFile("books.csv");
-
-		boolean done = false;
-		while (!done) {
-			writeToFile(libraryFile, getBookInfo());
-			if (getInput("Would you like to add another book?").toLowerCase().contains("n")) {
-				done = true;
-			}
-		}
-	}
-
 
 	private static File initialiseFile(String fileName) {
 		File fileObj = new File(fileName);
@@ -48,6 +40,52 @@ public class BookUtils {
 
 		return fileObj;
 	}
+
+
+	public static void viewBooks() {
+
+		AsciiTable table = new AsciiTable();
+
+		Stream<String> bookData = getBookData("books.csv").skip(1);
+
+		if (bookData != null) {
+			table.addRule();
+			table.addRow(String.join(",", bookAttributes).toUpperCase().split(","));
+			table.addRule();
+
+			bookData.forEachOrdered((String line) -> {
+				table.addRow(line.split(","));
+				table.addRule();
+			});
+
+			table.setPaddingLeft(5);
+			System.out.println(table.render(300));
+
+		} else {
+			System.out.println("Error reading book data :(");
+		}
+	}
+
+	private static Stream<String> getBookData(String filePath) {
+		try {
+			return Files.lines(Paths.get(filePath));
+		} catch (IOException e) {
+			return null;
+		}
+	}
+
+	public static void addBook() {
+		File libraryFile = initialiseFile("books.csv");
+
+		boolean done = false;
+		while (!done) {
+			writeToFile(libraryFile, getBookInfo());
+			if (getInput("Would you like to add another book?").toLowerCase().contains("n")) {
+				done = true;
+			}
+		}
+	}
+
 
 	private static LinkedHashMap<String, String> getBookInfo() {
 		LinkedHashMap<String, String> bookInfo = new LinkedHashMap<>();

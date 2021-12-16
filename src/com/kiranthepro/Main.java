@@ -1,6 +1,7 @@
 package com.kiranthepro;
 
 import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.HexFormat;
@@ -49,6 +50,14 @@ public class Main {
     public static FileWriter getFileWriter(File file) {
         try {
             return new FileWriter(file, true);
+        } catch (IOException e) {
+            return null;
+        }
+    }
+
+    public static FileReader getFileReader(File file) {
+        try {
+            return new FileReader(file);
         } catch (IOException e) {
             return null;
         }
