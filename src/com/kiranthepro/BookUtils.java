@@ -24,14 +24,13 @@ public class BookUtils {
 
 		try {
 			if (fileObj.createNewFile()) {
-				FileWriter writer = getFileWriter(fileObj);
+				// write header row if new file has to be created
+				FileWriter writer = getFileWriter(fileObj, false);
 				assert writer != null;
 				writer.write(String.join(",", bookAttributes) + "\n");
 				writer.flush();
 				writer.close();
 				System.out.println("File " + fileObj.getName() + " created successfully.");
-			} else {
-				System.out.println(fileObj.getName() + " already exists.");
 			}
 		} catch (IOException e) {
 			System.out.println("Something went wrong creating the file :(");
@@ -210,7 +209,7 @@ public class BookUtils {
 			values[i] = (String) data.values().toArray()[i];
 		}
 		try {
-			FileWriter writer = getFileWriter(file);
+			FileWriter writer = getFileWriter(file, true);
 			if (writer != null) {
 				writer.write(String.join(",", values) + "\n");
 				writer.flush();

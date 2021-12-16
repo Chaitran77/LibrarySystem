@@ -3,13 +3,14 @@ package com.kiranthepro;
 import org.json.JSONObject;
 
 import java.util.Arrays;
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
 import static com.kiranthepro.BookUtils.addBook;
 import static com.kiranthepro.BookUtils.viewBooks;
-import static com.kiranthepro.UAC.addUser;
-import static com.kiranthepro.UAC.deleteUser;
+import static com.kiranthepro.UserAccountControl.addUser;
+import static com.kiranthepro.UserAccountControl.deleteUser;
 
 public class MainMenu {
 
@@ -21,7 +22,7 @@ public class MainMenu {
 
 		// UAC.login returns user, hash --> stored in loggedInUserCredentials
 		// in constructor as it needs to be run to produce the correct menu every time
-		loggedInUserAccount = UAC.login();
+		loggedInUserAccount = UserAccountControl.login();
 
 		String[] universalActions = new String[]{ "switch user", "exit"};
 
@@ -45,7 +46,7 @@ public class MainMenu {
 		Scanner scanner = new Scanner(System.in);
 		try {
 			execute(actions[scanner.nextInt()-1]);
-		} catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
+		} catch (NumberFormatException | ArrayIndexOutOfBoundsException | InputMismatchException e) {
 			System.out.println("An error occurred; please type a number between 1 and " + actions.length);
 			getAndExecuteAction();
 		}

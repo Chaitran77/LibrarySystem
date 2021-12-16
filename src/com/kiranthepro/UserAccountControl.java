@@ -5,16 +5,37 @@ import org.json.JSONObject;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
 
-import static com.kiranthepro.Main.bytesToHex;
-import static com.kiranthepro.Main.getInputNNL;
+import static com.kiranthepro.Main.*;
 
-public class UAC {
+public class UserAccountControl {
+
+	private static File initialiseFile(String fileName) {
+		File fileObj = new File(fileName);
+
+		try {
+			if (fileObj.createNewFile()) {
+				FileWriter writer = getFileWriter(fileObj, false);
+				assert writer != null;
+				writer.write("[]\n");
+				writer.flush();
+				writer.close();
+				System.out.println("File " + fileObj.getName() + " created successfully.");
+			}
+		} catch (IOException e) {
+			System.out.println("Something went wrong creating the file :(");
+			e.printStackTrace();
+		}
+
+		return fileObj;
+	}
 
 	public static JSONObject login() {
 
@@ -83,6 +104,46 @@ public class UAC {
 	}
 
 	public static void addUser() {
+
+		JSONObject account = new JSONObject("""
+				{
+					"user": "",
+					"password": "",
+					"administrator": false,
+					"privileges": [
+				        "Add book",
+						"view books"
+					]
+				}""");
+
+		System.out.println("Create new user - enter the relevant information: ");
+		String username = getInputNNL("Username: ");
+		String password = getHash(getInputNNL("Password: "));
+		Boolean administrator = getYesNo("Administrator? y/n");
+
+		account.put("user", username);
+		account.put("password", password);
+		account.put("administrator", administrator);
+
+		if (administrator) {
+			account.put("privileges", new String[] {"add book",	"delete book", "modify book", "view books", "add user", "delete user"});
+		}
+
+		ArrayList<JSONObject> accountsArray = getAllAccountInfo("users.json");
+		assert accountsArray != null;
+		accountsArray.add(account);
+
+		FileWriter writer = getFileWriter(initialiseFile("users.json"), false);
+
+		try {
+			assert writer != null;
+			writer.write(accountsArray.toString());
+			writer.flush();
+			writer.close();
+			System.out.println("New user " + username + " created successfully.");
+		} catch (IOException e) {
+			System.out.println("Something went wrong writing the new user to disk. User not added.");
+		}
 
 	}
 

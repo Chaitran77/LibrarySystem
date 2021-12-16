@@ -47,9 +47,22 @@ public class Main {
         }
     }
 
-    public static FileWriter getFileWriter(File file) {
+    public static Boolean getYesNo(String prompt) {
+        String input = getInput(prompt);
+
+        if (input.toLowerCase().contains("y") && !input.toLowerCase().contains("n")) {
+            return true;
+        } else if (input.toLowerCase().contains("n") && !input.toLowerCase().contains("y")) {
+            return false;
+        } else {
+            System.out.println("Error reading input - please type either yes or no: ");
+            return getYesNo(prompt);
+        }
+    }
+
+    public static FileWriter getFileWriter(File file, boolean append) {
         try {
-            return new FileWriter(file, true);
+            return new FileWriter(file, append);
         } catch (IOException e) {
             return null;
         }

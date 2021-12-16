@@ -1,8 +1,5 @@
 [
 	{
-		"user": "kiran@inteleyes.com",
-		"password": "b26d28f46ceba1518fad6a7122320240084a5fe4fe73a5128fffcfffa86f2907",
-		"administrator": true,
 		"privileges": [
 			"add book",
 			"delete book",
@@ -10,21 +7,21 @@
 			"view books",
 			"add user",
 			"delete user"
-		]
+		],
+		"password": "b26d28f46ceba1518fad6a7122320240084a5fe4fe73a5128fffcfffa86f2907",
+		"administrator": true,
+		"user": "kiran@inteleyes.com"
 	},
 	{
-		"user": "johnsmith@WHO.org",
-		"password": "30e8a5e111cffb44debb2866258a31acb2c299dcd82e154d1628ad3507b4cb23",
-		"administrator":  false,
 		"privileges": [
 			"Add book",
 			"view books"
-		]
+		],
+		"password": "30e8a5e111cffb44debb2866258a31acb2c299dcd82e154d1628ad3507b4cb23",
+		"administrator": false,
+		"user": "johnsmith@WHO.org"
 	},
 	{
-		"user": "k",
-		"password": "b26d28f46ceba1518fad6a7122320240084a5fe4fe73a5128fffcfffa86f2907",
-		"administrator": true,
 		"privileges": [
 			"add book",
 			"delete book",
@@ -32,6 +29,27 @@
 			"view books",
 			"add user",
 			"delete user"
-		]
+		],
+		"password": "b26d28f46ceba1518fad6a7122320240084a5fe4fe73a5128fffcfffa86f2907",
+		"administrator": true,
+		"user": "k"
+	},
+	{
+		"privileges": [
+			"Add book",
+			"view books"
+		],
+		"password": "90300752de7525528b368d0995a226fe6613004cc41e31bd664a7437f10599a8",
+		"administrator": false,
+		"user": "happy"
+	},
+	{
+		"privileges": [
+			"Add book",
+			"view books"
+		],
+		"password": "90300752de7525528b368d0995a226fe6613004cc41e31bd664a7437f10599a8",
+		"administrator": false,
+		"user": "happy"
 	}
 ]
