@@ -19,21 +19,28 @@ public class BookUtils {
 
 	private static final String[] bookAttributes = {"title", "ISBN", "author", "genre", "year", "page count", "ISO language code", "cover type"};
 
-	private static File initialiseFile(String fileName) {
+	static File initialiseFile(String fileName) {
+		// returns a file object for a csv file and
 		File fileObj = new File(fileName);
 
 		try {
 			if (fileObj.createNewFile()) {
 				// write header row if new file has to be created
 				FileWriter writer = getFileWriter(fileObj, false);
+
 				assert writer != null;
-				writer.write(String.join(",", bookAttributes) + "\n");
+				if (fileName.equals("books.csv")) {
+					writer.write(String.join(",", bookAttributes) + "\n");
+				} else if (fileName.equals("users.json")) {
+					writer.write("[]\n");
+				}
+
 				writer.flush();
 				writer.close();
 				System.out.println("File " + fileObj.getName() + " created successfully.");
 			}
 		} catch (IOException e) {
-			System.out.println("Something went wrong creating the file :(");
+			System.out.println("Something went wrong opening the file :(");
 			e.printStackTrace();
 		}
 
@@ -42,6 +49,7 @@ public class BookUtils {
 
 
 	public static void viewBooks() {
+		// displays all stored book data in a user-friendly table
 
 		AsciiTable table = new AsciiTable();
 
@@ -107,6 +115,7 @@ public class BookUtils {
 	}
 
 	private static boolean validateAttributeInput(String attribute, String input) {
+		// performs different checks depending on attribute type
 		boolean inputValid = false;
 		String errorMessage = "";
 

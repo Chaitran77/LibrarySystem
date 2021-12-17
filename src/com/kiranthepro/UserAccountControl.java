@@ -13,29 +13,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
 
+import static com.kiranthepro.BookUtils.initialiseFile;
 import static com.kiranthepro.Main.*;
 
 public class UserAccountControl {
-
-	private static File initialiseFile(String fileName) {
-		File fileObj = new File(fileName);
-
-		try {
-			if (fileObj.createNewFile()) {
-				FileWriter writer = getFileWriter(fileObj, false);
-				assert writer != null;
-				writer.write("[]\n");
-				writer.flush();
-				writer.close();
-				System.out.println("File " + fileObj.getName() + " created successfully.");
-			}
-		} catch (IOException e) {
-			System.out.println("Something went wrong creating the file :(");
-			e.printStackTrace();
-		}
-
-		return fileObj;
-	}
 
 	public static JSONObject login() {
 
