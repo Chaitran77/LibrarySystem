@@ -93,6 +93,12 @@ public class BookUtils {
 		}
 	}
 
+	public static void searchBooks() {
+		// returns the book object(s) in which the provided string appears in any of their properties
+		// yes this is a linear search
+
+	}
+
 
 	private static LinkedHashMap<String, String> getBookInfo() {
 		LinkedHashMap<String, String> bookInfo = new LinkedHashMap<>();
