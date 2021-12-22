@@ -27,7 +27,7 @@ public class MainMenu {
 		List<Object> actionsList = loggedInUserAccount.getJSONArray("privileges").toList();
 		actionsList.addAll(List.of(universalActions)); // where the universalActions elements will be
 		// convert to array
-		actions = (String[]) Arrays.stream(actionsList.toArray()).toArray(Object[]::new);
+		actions = Arrays.stream(actionsList.toArray()).toArray(String[]::new);
 		searchBooks("9").forEach(System.out::println);
 		// delete/modify book --> book name --> search for book() --> display book info() --> is this the book you'd like to delete/modify?
 	}
