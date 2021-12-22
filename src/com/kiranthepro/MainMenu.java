@@ -7,30 +7,28 @@ import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
-import static com.kiranthepro.BookUtils.addBook;
-import static com.kiranthepro.BookUtils.viewBooks;
+import static com.kiranthepro.BookUtils.*;
 import static com.kiranthepro.UserAccountControl.addUser;
 import static com.kiranthepro.UserAccountControl.deleteUser;
 
 public class MainMenu {
 
 	private final String[] actions;
-	private final JSONObject loggedInUserAccount;
 	public boolean exited = false;
 
 	public MainMenu() {
 
 		// UAC.login returns user, hash --> stored in loggedInUserCredentials
 		// in constructor as it needs to be run to produce the correct menu every time
-		loggedInUserAccount = UserAccountControl.login();
+		JSONObject loggedInUserAccount = UserAccountControl.login();
 
 		String[] universalActions = new String[]{ "switch user", "exit"};
 
 		List<Object> actionsList = loggedInUserAccount.getJSONArray("privileges").toList();
 		actionsList.addAll(List.of(universalActions)); // where the universalActions elements will be
 		// convert to array
-		actions = Arrays.stream(actionsList.toArray()).toArray(String[]::new);
-
+		actions = (String[]) Arrays.stream(actionsList.toArray()).toArray(Object[]::new);
+		searchBooks("9").forEach(System.out::println);
 		// delete/modify book --> book name --> search for book() --> display book info() --> is this the book you'd like to delete/modify?
 	}
 

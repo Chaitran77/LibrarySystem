@@ -1,12 +1,14 @@
 package com.kiranthepro;
 
 import de.vandermeer.asciitable.AsciiTable;
+import org.json.JSONObject;
 
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.Locale;
@@ -93,10 +95,23 @@ public class BookUtils {
 		}
 	}
 
-	public static void searchBooks() {
+	public static ArrayList<String> searchBooks(String query) {
 		// returns the book object(s) in which the provided string appears in any of their properties
 		// yes this is a linear search
+		Stream<String> bookData = getBookData("books.csv").skip(1);
+		ArrayList<String> matchedBooks = new ArrayList<>();
 
+		bookData.forEachOrdered((String line) -> {
+			if (line.toLowerCase().contains(query.toLowerCase())) {
+				matchedBooks.add(line);
+			}
+		});
+
+		return matchedBooks;
+	}
+
+	private static JSONObject bookLineToJsonObject(String bookLine) {
+		return new JSONObject(bookLine);
 	}
 
 
