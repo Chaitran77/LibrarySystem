@@ -21,6 +21,8 @@ public class BookUtils {
 
 	private static final String[] bookAttributes = {"title", "ISBN", "author", "genre", "year", "page count", "ISO language code", "cover type"};
 
+
+	// first methods are 'utility methods' (therefore private) which are used by the public methods nearer the bottom of the file which are called by the MainMenu class
 	static File initialiseFile(String fileName) {
 		// returns a file object for a csv file and
 		File fileObj = new File(fileName);
@@ -75,26 +77,6 @@ public class BookUtils {
 		}
 	}
 
-	private static Stream<String> getBookData(String filePath) {
-		try {
-			return Files.lines(Paths.get(filePath));
-		} catch (IOException e) {
-			return null;
-		}
-	}
-
-	public static void addBook() {
-		File libraryFile = initialiseFile("books.csv");
-
-		boolean done = false;
-		while (!done) {
-			writeToFile(libraryFile, getBookInfo());
-			if (getInput("Would you like to add another book?").toLowerCase().contains("n")) {
-				done = true;
-			}
-		}
-	}
-
 	public static ArrayList<String> searchBooks(String query) {
 		// returns the book object(s) in which the provided string appears in any of their properties
 		// yes this is a linear search
@@ -110,8 +92,25 @@ public class BookUtils {
 		return matchedBooks;
 	}
 
-	private static JSONObject bookLineToJsonObject(String bookLine) {
-		return new JSONObject(bookLine);
+	public static String selectBook(String query) {
+		ArrayList<String> possibleBooks = searchBooks(query);
+		try {
+			displayBooks(possibleBooks, true);
+			int choice = Integer.parseInt(getInput("Type the number of the book you want to modify: "))-1;
+
+			ArrayList<String> bookArrayList = new ArrayList<>();
+			bookArrayList.add(possibleBooks.get(choice));
+			displayBooks(bookArrayList, false);
+			if (getYesNo("Is the above the correct book to modify?")) {
+				return possibleBooks.get(choice);
+			} else {
+				System.out.println("Okay, try again: ");
+				return selectBook(query);
+			}
+		}  catch (NumberFormatException | ArrayIndexOutOfBoundsException | InputMismatchException e) {
+			System.out.println("An error occurred; please type a number between 1 and " + possibleBooks.size());
+			return selectBook(query);
+		}
 	}
 
 
