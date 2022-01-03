@@ -51,6 +51,32 @@ public class BookUtils {
 		return fileObj;
 	}
 
+	private static void displayBooks(ArrayList<String> booksLines, boolean displayIndexNumbers) {
+		AsciiTable table = new AsciiTable();
+
+		table.addRule();
+		if (displayIndexNumbers) {
+			// the following adds an empty element to the start of bookAttributes so a column with an empty header is created
+			table.addRow(String.join(",", ArrayUtils.addAll(new String[] {" "}, bookAttributes)).toUpperCase().split(","));
+		} else {
+			table.addRow(String.join(",", bookAttributes).toUpperCase().split(","));
+		}
+		table.addRule();
+
+		booksLines.forEach((String line) -> {
+			String[] lineComps;
+			if (displayIndexNumbers) {
+				lineComps = (booksLines.indexOf(line)+1 + "," + line).split(",");
+			} else {
+				lineComps = line.split(",");
+			}
+			table.addRow(lineComps);
+			table.addRule();
+		});
+
+		table.setPaddingLeft(5);
+		System.out.println(table.render(300));
+	}
 
 	public static void viewBooks() {
 		// displays all stored book data in a user-friendly table
