@@ -1,21 +1,18 @@
 package com.kiranthepro;
 
 import de.vandermeer.asciitable.AsciiTable;
-import org.json.JSONObject;
+import org.apache.commons.lang3.ArrayUtils;
 
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.LinkedHashMap;
-import java.util.Locale;
+import java.util.*;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import static com.kiranthepro.Main.getFileWriter;
-import static com.kiranthepro.Main.getInput;
+import static com.kiranthepro.Main.*;
 
 public class BookUtils {
 
@@ -277,5 +274,46 @@ public class BookUtils {
 		System.out.println();
 	}
 
+	private static Stream<String> getBookData(String filePath) {
+		try {
+			return Files.lines(Paths.get(filePath));
+		} catch (IOException e) {
+			return null;
+		}
+	}
+
+	public static void addBook() {
+		File libraryFile = initialiseFile("books.csv");
+
+		boolean done = false;
+		while (!done) {
+			writeToFile(libraryFile, getBookInfo());
+			if (getInput("Would you like to add another book?").toLowerCase().contains("n")) {
+				done = true;
+			}
+		}
+	}
+
+	public static void deleteBook() {
+		Stream<String> bookLines = getBookData("books.csv");
+		String selectedBook = selectBook(getInput("Search for a book you'd like to delete: "));
+		assert bookLines != null;
+		ArrayList<String> bookLinesArray = bookLines.collect(Collectors.toCollection(ArrayList::new));
+		bookLinesArray.remove(selectedBook);
+
+		try {
+			FileWriter writer = getFileWriter(initialiseFile("books.csv"), false);
+			assert writer != null;
+			writer.write(String.join("\n", bookLinesArray));
+			writer.flush();
+			writer.close();
+		} catch (IOException e) {
+			System.out.println("Error writing to file: Book not deleted.");
+		}
+	}
+
+	public static void modifyBook() {
+
+	}
 
 }

@@ -28,7 +28,6 @@ public class MainMenu {
 		actionsList.addAll(List.of(universalActions)); // where the universalActions elements will be
 		// convert to array
 		actions = Arrays.stream(actionsList.toArray()).toArray(String[]::new);
-		searchBooks("9").forEach(System.out::println);
 		// delete/modify book --> book name --> search for book() --> display book info() --> is this the book you'd like to delete/modify?
 	}
 
@@ -65,8 +64,8 @@ public class MainMenu {
 		// TODO: Implement all these functions (in the BookUtils class)
 		switch (action.toLowerCase()) {
 			case "add book" -> addBook();
-			case "delete book" -> test();
-			case "modify book" -> test();
+			case "delete book" -> deleteBook();
+			case "modify book" -> modifyBook();
 			case "view books" -> viewBooks();
 			case "add user" -> addUser();
 			case "delete user" -> deleteUser();
