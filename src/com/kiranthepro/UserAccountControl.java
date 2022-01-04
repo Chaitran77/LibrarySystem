@@ -145,7 +145,12 @@ public class UserAccountControl {
 		if (accountToDelete != null) {
 			if (getYesNo("Found account! Please confirm this is the account you want to delete: ")) {
 				assert allAccounts != null;
-				allAccounts.remove(accountToDelete);
+
+				for (int i = 0; i < allAccounts.size(); i++) {
+					if (allAccounts.get(i).get("user").equals(accountToDelete.get("user"))) {
+						allAccounts.remove(i);
+					}
+				}
 
 				FileWriter writer = getFileWriter(initialiseFile("users.json"), false);
 

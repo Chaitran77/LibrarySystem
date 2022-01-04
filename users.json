@@ -36,24 +36,6 @@
 	},
 	{
 		"privileges": [
-			"Add book",
-			"view books"
-		],
-		"password": "90300752de7525528b368d0995a226fe6613004cc41e31bd664a7437f10599a8",
-		"administrator": false,
-		"user": "happy"
-	},
-	{
-		"privileges": [
-			"Add book",
-			"view books"
-		],
-		"password": "90300752de7525528b368d0995a226fe6613004cc41e31bd664a7437f10599a8",
-		"administrator": false,
-		"user": "happy"
-	},
-	{
-		"privileges": [
 			"add book",
 			"delete book",
 			"modify book",
