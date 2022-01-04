@@ -51,5 +51,18 @@
 		"password": "90300752de7525528b368d0995a226fe6613004cc41e31bd664a7437f10599a8",
 		"administrator": false,
 		"user": "happy"
+	},
+	{
+		"privileges": [
+			"add book",
+			"delete book",
+			"modify book",
+			"view books",
+			"add user",
+			"delete user"
+		],
+		"password": "5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8",
+		"administrator": true,
+		"user": "kp211778@reigate.ac.uk"
 	}
 ]
