@@ -1,50 +1,63 @@
 [
-	{
-		"privileges": [
-			"add book",
-			"delete book",
-			"modify book",
-			"view books",
-			"add user",
-			"delete user"
-		],
-		"password": "b26d28f46ceba1518fad6a7122320240084a5fe4fe73a5128fffcfffa86f2907",
-		"administrator": true,
-		"user": "kiran@inteleyes.com"
-	},
-	{
-		"privileges": [
-			"Add book",
-			"view books"
-		],
-		"password": "30e8a5e111cffb44debb2866258a31acb2c299dcd82e154d1628ad3507b4cb23",
-		"administrator": false,
-		"user": "johnsmith@WHO.org"
-	},
-	{
-		"privileges": [
-			"add book",
-			"delete book",
-			"modify book",
-			"view books",
-			"add user",
-			"delete user"
-		],
-		"password": "b26d28f46ceba1518fad6a7122320240084a5fe4fe73a5128fffcfffa86f2907",
-		"administrator": true,
-		"user": "k"
-	},
-	{
-		"privileges": [
-			"add book",
-			"delete book",
-			"modify book",
-			"view books",
-			"add user",
-			"delete user"
-		],
-		"password": "5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8",
-		"administrator": true,
-		"user": "kp211778@reigate.ac.uk"
-	}
+  {
+    "privileges": [
+      "add book",
+      "delete book",
+      "modify book",
+      "view books",
+      "add user",
+      "delete user"
+    ],
+    "password": "b26d28f46ceba1518fad6a7122320240084a5fe4fe73a5128fffcfffa86f2907",
+    "administrator": true,
+    "user": "kiran@inteleyes.com"
+  },
+  {
+    "privileges": [
+      "Add book",
+      "view books"
+    ],
+    "password": "30e8a5e111cffb44debb2866258a31acb2c299dcd82e154d1628ad3507b4cb23",
+    "administrator": false,
+    "user": "johnsmith@WHO.org"
+  },
+  {
+    "privileges": [
+      "add book",
+      "delete book",
+      "modify book",
+      "view books",
+      "add user",
+      "delete user"
+    ],
+    "password": "b26d28f46ceba1518fad6a7122320240084a5fe4fe73a5128fffcfffa86f2907",
+    "administrator": true,
+    "user": "k"
+  },
+  {
+    "privileges": [
+      "add book",
+      "delete book",
+      "modify book",
+      "view books",
+      "add user",
+      "delete user"
+    ],
+    "password": "5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8",
+    "administrator": true,
+    "user": "kp211778@reigate.ac.uk"
+  },
+  {
+    "privileges": [
+      "add book",
+      "delete book",
+      "modify book",
+      "view books",
+      "add user",
+      "delete user"
+    ],
+    "password": "172b5199c648bf5792cb4f5233d0ade1f41deba654ef48c8860c88a6268db7d7",
+    "administrator": true,
+    "user": "chazmuth@gmail.com"
+  }
 ]
